@@ -44,11 +44,10 @@ public class BeerController {
     }
 
     @PostMapping(BEER_PATH)
-//    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity handlePost(@RequestBody Beer beer){
         Beer saveBeer = beerService.saveNewBeer(beer);
         HttpHeaders headers = new  HttpHeaders();
-        headers.add("Location",BEER_PATH + "/" + saveBeer.getId().toString());
+        headers.add("Location",BEER_PATH_ID + saveBeer.getId().toString());
         return new ResponseEntity(headers,HttpStatus.CREATED);
     }
 
