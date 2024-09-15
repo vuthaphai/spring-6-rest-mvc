@@ -1,8 +1,6 @@
 package guru.springframework.spring_6_rest_mvc.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import guru.springframework.spring_6_rest_mvc.model.Beer;
 import guru.springframework.spring_6_rest_mvc.model.Customer;
 import guru.springframework.spring_6_rest_mvc.services.CustomerService;
 import guru.springframework.spring_6_rest_mvc.services.CustomerServiceImpl;
@@ -18,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -135,7 +134,7 @@ class CustomerControllerTest {
     @Test
     void getBeerByIdNotFound() throws Exception {
 
-        given(customerService.getCustomerById(any(UUID.class))).willThrow(NotFoundException.class);
+        given(customerService.getCustomerById(any(UUID.class))).willReturn(Optional.empty());
 
         mockMvc.perform(get(CustomerController.CUSTOMER_PATH_ID,UUID.randomUUID()))
                 .andExpect(status().isNotFound());
@@ -145,7 +144,7 @@ class CustomerControllerTest {
     void getCustomerById() throws Exception {
         Customer customer = customerServiceImpl.getAllCustomers().get(0);
 
-        given(customerService.getCustomerById(customer.getId())).willReturn(customer);
+        given(customerService.getCustomerById(customer.getId())).willReturn(Optional.of(customer));
 
         mockMvc.perform(get(CustomerController.CUSTOMER_PATH_ID, customer.getId())
                         .accept(MediaType.APPLICATION_JSON))
