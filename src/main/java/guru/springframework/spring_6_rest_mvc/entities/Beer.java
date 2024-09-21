@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -36,6 +38,7 @@ public class Beer {
     private String beerName;
 
     @NotNull
+    @JdbcTypeCode(value = SqlTypes.SMALLINT)
     private BeerStyle beerStyle;
 
     @NotNull
