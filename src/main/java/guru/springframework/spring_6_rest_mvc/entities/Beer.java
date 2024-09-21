@@ -31,8 +31,8 @@ public class Beer {
 
     @NotNull
     @NotBlank
-    @Size(max = 60)
-    @Column(length = 60)
+    @Size(max = 36)
+    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private String beerName;
 
     @NotNull
