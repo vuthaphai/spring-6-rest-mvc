@@ -2,6 +2,7 @@ package guru.springframework.spring_6_rest_mvc.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -24,7 +25,11 @@ public class BeerDTO {
 
     @NotNull
     private BigDecimal price;
+
+    @CreationTimestamp
     private LocalDateTime createdDate;
+
+    @CreationTimestamp
     private LocalDateTime updateDate;
 
     BeerDTO(UUID id, Integer version, String beerName, BeerStyle beerStyle, String upc, Integer quantityOnHand, BigDecimal price, LocalDateTime createdDate, LocalDateTime updateDate) {

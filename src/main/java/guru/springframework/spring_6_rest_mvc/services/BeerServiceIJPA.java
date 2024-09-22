@@ -97,4 +97,33 @@ public class BeerServiceIJPA implements BeerService {
 
         return atomicReference.get();
     }
+
+//    @Override
+//    public Optional<BeerDTO> patchBeerById(UUID beerId, BeerDTO beer) {
+//        AtomicReference<Optional<BeerDTO>> atomicReference = new AtomicReference<>();
+//
+//        beerRepository.findById(beerId).ifPresentOrElse(foundBeer -> {
+//            if (StringUtils.hasText(beer.getBeerName())){
+//                foundBeer.setBeerName(beer.getBeerName());
+//            }
+//            if (beer.getBeerStyle() != null){
+//                foundBeer.setBeerStyle(beer.getBeerStyle());
+//            }
+//            if (StringUtils.hasText(beer.getUpc())){
+//                foundBeer.setUpc(beer.getUpc());
+//            }
+//            if (beer.getPrice() != null){
+//                foundBeer.setPrice(beer.getPrice());
+//            }
+//            if (beer.getQuantityOnHand() != null){
+//                foundBeer.setQuantityOnHand(beer.getQuantityOnHand());
+//            }
+//            atomicReference.set(Optional.of(beerMapper
+//                    .beerToBeerDto(beerRepository.save(foundBeer))));
+//        }, () -> {
+//            atomicReference.set(Optional.empty());
+//        });
+//
+//        return atomicReference.get();
+//    }
 }

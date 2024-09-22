@@ -20,7 +20,7 @@ public class Customer {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @JdbcTypeCode(SqlTypes.CHAR)
-    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
+    @Column(length = 50, columnDefinition = "varchar(50)", updatable = false, nullable = false)
     private UUID id;
     private String name;
 
