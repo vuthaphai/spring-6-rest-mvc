@@ -2,6 +2,7 @@ package guru.springframework.spring_6_rest_mvc.controller;
 
 
 import guru.springframework.spring_6_rest_mvc.model.BeerDTO;
+import guru.springframework.spring_6_rest_mvc.model.BeerStyle;
 import guru.springframework.spring_6_rest_mvc.services.BeerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,18 +28,6 @@ public class BeerController {
         beerService.patchBeerById(beerId, beer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-
-//    @PatchMapping(BEER_PATH_ID)
-//    public ResponseEntity updateBeerPatchById(@PathVariable("beerId")UUID beerId, @RequestBody BeerDTO beer){
-//
-//        beerService.patchBeerById(beerId, beer);
-//
-//        return new ResponseEntity(HttpStatus.NO_CONTENT);
-//    }
-
-
-
-
 
     @DeleteMapping(BEER_PATH_ID)
     public ResponseEntity deleteBeerById(@PathVariable("beerId") UUID beerId){
@@ -67,8 +56,10 @@ public class BeerController {
     }
 
    @GetMapping(value = BEER_PATH)
-    public List<BeerDTO> listBeers(){
-        return beerService.listBeers();
+    public List<BeerDTO> listBeers(@RequestParam(required = false) String beerName,
+                                   @RequestParam(required = false) BeerStyle beerStyle,
+                                   @RequestParam(required = false) Boolean showInventory){
+        return beerService.listBeers(beerName, beerStyle, showInventory);
     }
 
 
