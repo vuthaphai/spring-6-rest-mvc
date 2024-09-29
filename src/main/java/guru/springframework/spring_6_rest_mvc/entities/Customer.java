@@ -30,6 +30,6 @@ public class Customer {
     private LocalDateTime createdDate;
     private LocalDateTime updateDate;
 
-//    @OneToMany(mappedBy = "customer")
-//    private Set<BeerOrder> beerOrders;
+    @OneToMany(mappedBy = "customer")
+    private Set<BeerOrder> beerOrders;
 }

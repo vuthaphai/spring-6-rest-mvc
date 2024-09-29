@@ -14,6 +14,7 @@ import org.hibernate.type.SqlTypes;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -41,6 +42,7 @@ public class Beer {
     private String beerName;
 
     @NotNull
+    @JdbcTypeCode((SqlTypes.SMALLINT))
     private BeerStyle beerStyle;
 
     @NotNull
@@ -57,4 +59,9 @@ public class Beer {
 
     @CreationTimestamp
     private LocalDateTime updateDate;
+
+    @OneToMany(mappedBy = "beer")
+    private Set<BeerOrderLine> beerOrderLine;
+
+
 }

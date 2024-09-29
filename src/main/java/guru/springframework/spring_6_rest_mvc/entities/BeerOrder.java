@@ -10,14 +10,14 @@ import org.hibernate.type.SqlTypes;
 
 import java.sql.Timestamp;
 import java.util.UUID;
+import java.util.Set;
 
 @Getter
 @Setter
-@Builder
 @Entity
-@Table(name = "beer_order")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class BeerOrder {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -45,6 +45,10 @@ public class BeerOrder {
 
     private String customerRef;
 
-//    @ManyToOne()
-//    private Customer customer;
+    @ManyToOne
+    private Customer customer;
+
+    @OneToMany(mappedBy = "beerOrder")
+    private Set<BeerOrderLine> beerOrderLines;
+
 }
