@@ -7,6 +7,7 @@ import guru.springframework.spring_6_rest_mvc.model.BeerStyle;
 import guru.springframework.spring_6_rest_mvc.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -18,6 +19,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
+@Profile("localmysql")
 @Primary
 @RequiredArgsConstructor
 public class BeerServiceIJPA implements BeerService {
