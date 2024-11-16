@@ -1,12 +1,14 @@
 package guru.springframework.spring_6_rest_mvc.controller;
 
 
+import guru.springframework.spring_6_rest_mvc.entities.PartialUpdate;
 import guru.springframework.spring_6_rest_mvc.model.CustomerDTO;
 import guru.springframework.spring_6_rest_mvc.services.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PatchMapping(CUSTOMER_PATH_ID)
-    public ResponseEntity updateCustomerPatchById(@PathVariable("customerId") UUID customerId,@RequestBody CustomerDTO customer){
+    public ResponseEntity updateCustomerPatchById(@PathVariable("customerId") UUID customerId,@Validated({PartialUpdate.class}) @RequestBody CustomerDTO customer){
         customerService.updateCustomerPatchById(customerId,customer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

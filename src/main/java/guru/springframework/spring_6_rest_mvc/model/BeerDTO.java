@@ -1,7 +1,10 @@
 package guru.springframework.spring_6_rest_mvc.model;
 
+import guru.springframework.spring_6_rest_mvc.entities.FullUpdate;
+import guru.springframework.spring_6_rest_mvc.entities.PartialUpdate;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
@@ -12,18 +15,20 @@ public class BeerDTO {
     private UUID id;
     private Integer version;
 
-    @NotBlank
+    @NotBlank(groups = {FullUpdate.class, PartialUpdate.class})
     @NotNull
+    @Size(max = 100)
     private String beerName;
-    @NotNull
+
+    @NotNull(groups = FullUpdate.class)
     private BeerStyle beerStyle;
 
     @NotBlank
-    @NotNull
+    @NotNull(groups = FullUpdate.class)
     private String upc;
     private Integer quantityOnHand;
 
-    @NotNull
+    @NotNull(groups = FullUpdate.class)
     private BigDecimal price;
 
     @CreationTimestamp
@@ -43,6 +48,10 @@ public class BeerDTO {
         this.createdDate = createdDate;
         this.updateDate = updateDate;
     }
+
+    // Inner interfaces for validation groups
+//    public interface FullUpdate {}
+//    public interface PartialUpdate {}
 
     public static BeerBuilder builder() {
         return new BeerBuilder();

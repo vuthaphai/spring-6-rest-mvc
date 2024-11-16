@@ -6,6 +6,7 @@ import guru.springframework.spring_6_rest_mvc.model.BeerDTO;
 import guru.springframework.spring_6_rest_mvc.model.BeerStyle;
 import guru.springframework.spring_6_rest_mvc.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
+@Slf4j
 @Service
 @Profile("localmysql")
 @Primary
@@ -127,6 +129,8 @@ public class BeerServiceIJPA implements BeerService {
     @Override
     public Optional<BeerDTO> patchBeerById(UUID beerId, BeerDTO beer) {
         AtomicReference<Optional<BeerDTO>> atomicReference = new AtomicReference<>();
+
+        log.debug("beer: "+ beer);
 
         beerRepository.findById(beerId).ifPresentOrElse(foundBeer -> {
             if (StringUtils.hasText(beer.getBeerName())){

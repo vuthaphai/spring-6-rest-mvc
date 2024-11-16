@@ -67,10 +67,16 @@ public class BeerServiceImpl implements BeerService {
         return new PageImpl<>( new ArrayList<>(beerMap.values()));
     }
 
+//    @Override
+//    public Optional<BeerDTO> getBeerById(UUID id) {
+//        log.debug("Get Beer by Id - in service: " + id.toString());
+//        return Optional.of(beerMap.get(id));
+//    }
+
     @Override
     public Optional<BeerDTO> getBeerById(UUID id) {
-        log.debug("Get Beer by Id - in service" + id.toString());
-        return Optional.of(beerMap.get(id));
+        log.debug("Get Beer by Id - in service: " + id.toString());
+        return Optional.ofNullable(beerMap.get(id)); // Use ofNullable to handle null values
     }
 
     @Override

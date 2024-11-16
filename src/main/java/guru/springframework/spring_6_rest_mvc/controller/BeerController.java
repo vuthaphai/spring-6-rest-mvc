@@ -1,6 +1,8 @@
 package guru.springframework.spring_6_rest_mvc.controller;
 
 
+import guru.springframework.spring_6_rest_mvc.entities.FullUpdate;
+import guru.springframework.spring_6_rest_mvc.entities.PartialUpdate;
 import guru.springframework.spring_6_rest_mvc.model.BeerDTO;
 import guru.springframework.spring_6_rest_mvc.model.BeerStyle;
 import guru.springframework.spring_6_rest_mvc.services.BeerService;
@@ -24,7 +26,7 @@ public class BeerController {
     private final BeerService beerService;
 
     @PatchMapping(BEER_PATH_ID)
-    public ResponseEntity patchBeerById(@PathVariable("beerId") UUID beerId,@Validated @RequestBody BeerDTO beer){
+    public ResponseEntity patchBeerById(@PathVariable("beerId") UUID beerId,@Validated({PartialUpdate.class}) @RequestBody BeerDTO beer){
         beerService.patchBeerById(beerId, beer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -40,7 +42,7 @@ public class BeerController {
 
 
     @PutMapping(BEER_PATH_ID)
-    public ResponseEntity updatebyId(@PathVariable("beerId") UUID beerId, @Validated @RequestBody BeerDTO beer){
+    public ResponseEntity updatebyId(@PathVariable("beerId") UUID beerId, @Validated({FullUpdate.class}) @RequestBody BeerDTO beer){
         if(beerService.updateBeerById(beerId, beer).isEmpty()){
             throw new NotFoundException();
         };
@@ -76,7 +78,8 @@ public class BeerController {
 
     @GetMapping(value = BEER_PATH_ID)
     public BeerDTO getBeerById(@PathVariable("beerId") UUID id){
-        log.debug("Get Beer by Id - in controller 1234");
+        log.debug("Get Beer by Id - in controller");
+        log.debug("beerId: " + id);
         return beerService.getBeerById(id).orElseThrow(NotFoundException::new);
     }
 }
